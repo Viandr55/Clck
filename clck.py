@@ -16,7 +16,7 @@ def shorten_url(url):
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-    bot.send_message(message.chat.id, f"Привет, <b>{message.from_user.full_name}</b>!\n Отправь мне ссылку, и я сокращу её через Яндекс Кликер.", parse_mode='html')
+    bot.send_message(message.chat.id, f"Привет, <b>{message.from_user.full_name}</b>\nОтправь мне ссылку, и я сокращу её через Яндекс Кликер", parse_mode='html')
 
 @bot.message_handler(func=lambda message: True)
 def shorten_link(message):
