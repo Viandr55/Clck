@@ -15,18 +15,18 @@ def shorten_url(url):
         return None
 
 @bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-    bot.send_message(message.chat.id, f"Привет, <b>{message.from_user.full_name}</b>\nОтправь мне ссылку, и я сокращу её через Яндекс Кликер", parse_mode='html')
+def start(message):
+    bot.send_message(message.chat.id, f"Привет, <b>{message.from_user.full_name}</b> 👋\n\nОтправь мне ссылку, и я сокращу её через Яндекс Кликер", parse_mode='html')
 
 @bot.message_handler(func=lambda message: True)
 def shorten_link(message):
     if message.text.startswith("http://") or message.text.startswith("https://"):
         short_url = shorten_url(message.text)
         if short_url:
-            bot.reply_to(message, short_url)
+            bot.reply_to(message, f'<code>{short_url}</code>', parse_mode="html")
         else:
-            bot.reply_to(message, "Произошла ошибка при сокращении ссылки.")
+            bot.reply_to(message, "Произошла ошибка при сокращении ссылки")
     else:
-        bot.reply_to(message, "Извините, я могу обрабатывать только ссылки, начинающиеся с http:// или https://.")
+        bot.reply_to(message, "Извините, я могу обрабатывать только ссылки, начинающиеся с http:// или https://")
 
 bot.polling()
